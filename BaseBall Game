@@ -1,0 +1,19 @@
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        ##create the stack to record all scores
+        stack=[]
+        for op in ops:
+            ## record a new score that is the sum of the previous two scores
+            if op == '+':
+                stack.append(stack[-1] + stack[-2])
+            ## Invalidate the previous score by removing it from the record
+            elif op == 'C':
+                stack.pop()
+            ##Record a new score that is double the previous score
+            elif op == 'D':
+                stack.append(2 * stack[-1])
+            ##Record a new score of x
+            else:
+                stack.append(int(op))
+        ## Return the sum of all scores on the record
+        return sum(stack)
